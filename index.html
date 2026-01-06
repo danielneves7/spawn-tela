@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <title>Spawn</title>
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
 *{
     margin:0;
@@ -16,9 +18,7 @@
 body{
     width:100vw;
     height:100vh;
-    background:url("assets/background.png");
-    background-size:cover;
-    background-position:center;
+    background:url("assets/background.png") center/cover no-repeat;
     display:flex;
     flex-direction:column;
     justify-content:center;
@@ -27,33 +27,33 @@ body{
 
 /* TÍTULO */
 .title{
-    color:rgba(255,255,255,0.75);
+    color:rgba(255,255,255,0.80);
     font-size:18px;
     letter-spacing:1px;
-    margin-bottom:18px;
+    margin-bottom:20px;
     text-shadow:0 0 8px rgba(0,0,0,0.6);
     text-align:center;
-    margin-top:80px;
 }
 
 /* CONTAINER */
 .container{
     display:flex;
-    gap:18px;
+    gap:20px;
     justify-content:center;
     align-items:center;
 }
 
 /* BOXES */
 .card{
-    width:185px;   /* menor ainda (-10% extra) */
-    transition:.2s;
+    width:190px;
+    transition:.15s;
     cursor:pointer;
 }
 
 .card img{
     width:100%;
     border-radius:6px;
+    pointer-events:none;
 }
 
 .card:active{
@@ -62,46 +62,47 @@ body{
 
 /* BOTÃO */
 .button-loc{
-    margin-top:8px;   /* SUBIDO MAIS */
-    padding:6px 14px;
+    margin-top:18px;
+    padding:4px 10px;
     border-radius:12px;
     display:flex;
     align-items:center;
-    gap:4px;
+    gap:5px;
     border:2px solid rgba(255,255,255,0.3);
-    background:rgba(123,44,255,0.30);
+    background:rgba(123,44,255,0.35);
     backdrop-filter:blur(6px);
     color:white;
     font-size:10px;
     font-weight:bold;
     cursor:pointer;
-    outline:none;
 }
 
 .button-loc img{
     width:12px;
 }
-
-button:focus{
-    outline:0;
-}
 </style>
 
 <script>
-function send(evt){
-    if(typeof CefSendEvent !== "undefined"){
-        CefSendEvent(evt, "");
-    } 
-    else if(typeof window.CefSendEvent !== "undefined"){
-        window.CefSendEvent(evt, "");
+
+// fallback igual login
+if(typeof Cef === "undefined"){
+    window.Cef = {
+        sendEvent:(n,d)=>console.log("CEF EVENT:",n,d)
     }
 }
 
-function spawn1(){ send("spawn1"); }
-function spawn2(){ send("spawn2"); }
-function spawn3(){ send("spawn3"); }
-function spawn4(){ send("spawn4"); }
-function lastpos(){ send("lastpos"); }
+// ENVIAR EVENTO IGUAL LOGIN
+function spawn(num){
+    Cef.sendEvent("spawn"+num, "");
+}
+
+function lastpos(){
+    Cef.sendEvent("lastpos", "");
+}
+
+// garantir toque mobile
+document.addEventListener("touchstart", ()=>{}, true);
+
 </script>
 
 </head>
@@ -112,19 +113,19 @@ function lastpos(){ send("lastpos"); }
 
 <div class="container">
 
-    <div class="card" onclick="spawn1()">
+    <div class="card" onclick="spawn(1)">
         <img src="assets/box1.png">
     </div>
 
-    <div class="card" onclick="spawn2()">
+    <div class="card" onclick="spawn(2)">
         <img src="assets/box2.png">
     </div>
 
-    <div class="card" onclick="spawn3()">
+    <div class="card" onclick="spawn(3)">
         <img src="assets/box3.png">
     </div>
 
-    <div class="card" onclick="spawn4()">
+    <div class="card" onclick="spawn(4)">
         <img src="assets/box4.png">
     </div>
 
