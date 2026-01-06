@@ -30,22 +30,23 @@ body{
     color:rgba(255,255,255,0.75);
     font-size:18px;
     letter-spacing:1px;
-    margin-bottom:28px;
+    margin-bottom:18px;   /* DESCEMOS MENOS */
     text-shadow:0 0 8px rgba(0,0,0,0.6);
     text-align:center;
+    margin-top:80px;      /* DESCEMOS O TEXTO MAIS */
 }
 
 /* CONTAINER */
 .container{
     display:flex;
-    gap:24px;
+    gap:20px;
     justify-content:center;
     align-items:center;
 }
 
 /* BOXES */
 .card{
-    width:256px;
+    width:215px;   /* -15% */
     transition:.2s;
     cursor:pointer;
 }
@@ -62,24 +63,24 @@ body{
 
 /* BOTÃO */
 .button-loc{
-    margin-top:28px;
-    padding:3px 8px;
+    margin-top:18px;  /* SUBIMOS O BOTÃO */
+    padding:6px 14px;
     border-radius:12px;
     display:flex;
     align-items:center;
-    gap:3px;
+    gap:4px;
     border:2px solid rgba(255,255,255,0.3);
     background:rgba(123,44,255,0.30);
     backdrop-filter:blur(6px);
     color:white;
-    font-size:8px;
+    font-size:10px;
     font-weight:bold;
     cursor:pointer;
     outline:none;
 }
 
 .button-loc img{
-    width:10px;
+    width:12px;
 }
 
 button:focus{
@@ -88,8 +89,20 @@ button:focus{
 </style>
 
 <script>
-function spawn(num){
-    CefSendEvent("spawn" + num, "");
+function spawn1(){
+    CefSendEvent("spawn1", "");
+}
+
+function spawn2(){
+    CefSendEvent("spawn2", "");
+}
+
+function spawn3(){
+    CefSendEvent("spawn3", "");
+}
+
+function spawn4(){
+    CefSendEvent("spawn4", "");
 }
 
 function lastpos(){
@@ -105,19 +118,19 @@ function lastpos(){
 
 <div class="container">
 
-    <div class="card" onclick="spawn(1)">
+    <div class="card" onclick="spawn1()">
         <img src="assets/box1.png">
     </div>
 
-    <div class="card" onclick="spawn(2)">
+    <div class="card" onclick="spawn2()">
         <img src="assets/box2.png">
     </div>
 
-    <div class="card" onclick="spawn(3)">
+    <div class="card" onclick="spawn3()">
         <img src="assets/box3.png">
     </div>
 
-    <div class="card" onclick="spawn(4)">
+    <div class="card" onclick="spawn4()">
         <img src="assets/box4.png">
     </div>
 
