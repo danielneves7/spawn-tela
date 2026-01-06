@@ -30,23 +30,23 @@ body{
     color:rgba(255,255,255,0.75);
     font-size:18px;
     letter-spacing:1px;
-    margin-bottom:18px;   /* DESCEMOS MENOS */
+    margin-bottom:18px;
     text-shadow:0 0 8px rgba(0,0,0,0.6);
     text-align:center;
-    margin-top:80px;      /* DESCEMOS O TEXTO MAIS */
+    margin-top:80px;
 }
 
 /* CONTAINER */
 .container{
     display:flex;
-    gap:20px;
+    gap:18px;
     justify-content:center;
     align-items:center;
 }
 
 /* BOXES */
 .card{
-    width:215px;   /* -15% */
+    width:185px;   /* menor ainda (-10% extra) */
     transition:.2s;
     cursor:pointer;
 }
@@ -54,7 +54,6 @@ body{
 .card img{
     width:100%;
     border-radius:6px;
-    pointer-events:none;
 }
 
 .card:active{
@@ -63,7 +62,7 @@ body{
 
 /* BOTÃO */
 .button-loc{
-    margin-top:18px;  /* SUBIMOS O BOTÃO */
+    margin-top:8px;   /* SUBIDO MAIS */
     padding:6px 14px;
     border-radius:12px;
     display:flex;
@@ -89,25 +88,20 @@ button:focus{
 </style>
 
 <script>
-function spawn1(){
-    CefSendEvent("spawn1", "");
+function send(evt){
+    if(typeof CefSendEvent !== "undefined"){
+        CefSendEvent(evt, "");
+    } 
+    else if(typeof window.CefSendEvent !== "undefined"){
+        window.CefSendEvent(evt, "");
+    }
 }
 
-function spawn2(){
-    CefSendEvent("spawn2", "");
-}
-
-function spawn3(){
-    CefSendEvent("spawn3", "");
-}
-
-function spawn4(){
-    CefSendEvent("spawn4", "");
-}
-
-function lastpos(){
-    CefSendEvent("lastpos", "");
-}
+function spawn1(){ send("spawn1"); }
+function spawn2(){ send("spawn2"); }
+function spawn3(){ send("spawn3"); }
+function spawn4(){ send("spawn4"); }
+function lastpos(){ send("lastpos"); }
 </script>
 
 </head>
