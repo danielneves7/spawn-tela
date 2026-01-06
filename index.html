@@ -4,8 +4,6 @@
 <meta charset="UTF-8">
 <title>Spawn</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
 *{
     margin:0;
@@ -18,7 +16,9 @@
 body{
     width:100vw;
     height:100vh;
-    background:url("assets/background.png") center/cover no-repeat;
+    background:url("assets/background.png");
+    background-size:cover;
+    background-position:center;
     display:flex;
     flex-direction:column;
     justify-content:center;
@@ -27,10 +27,10 @@ body{
 
 /* TÍTULO */
 .title{
-    color:rgba(255,255,255,0.80);
+    color:rgba(255,255,255,0.75);
     font-size:18px;
     letter-spacing:1px;
-    margin-bottom:20px;
+    margin-bottom:12px; /* desceu um pouco */
     text-shadow:0 0 8px rgba(0,0,0,0.6);
     text-align:center;
 }
@@ -38,15 +38,15 @@ body{
 /* CONTAINER */
 .container{
     display:flex;
-    gap:20px;
+    gap:24px;
     justify-content:center;
     align-items:center;
 }
 
 /* BOXES */
 .card{
-    width:190px;
-    transition:.15s;
+    width:190px; /* imagens diminuídas */
+    transition:.2s;
     cursor:pointer;
 }
 
@@ -62,47 +62,49 @@ body{
 
 /* BOTÃO */
 .button-loc{
-    margin-top:18px;
-    padding:4px 10px;
+    margin-top:18px; /* botão mais pra cima */
+    padding:3px 8px;
     border-radius:12px;
     display:flex;
     align-items:center;
-    gap:5px;
+    gap:3px;
     border:2px solid rgba(255,255,255,0.3);
-    background:rgba(123,44,255,0.35);
+    background:rgba(123,44,255,0.30);
     backdrop-filter:blur(6px);
     color:white;
-    font-size:10px;
+    font-size:8px;
     font-weight:bold;
     cursor:pointer;
+    outline:none;
 }
 
 .button-loc img{
-    width:12px;
+    width:10px;
+}
+
+button:focus{
+    outline:0;
 }
 </style>
 
 <script>
-
-// fallback igual login
-if(typeof Cef === "undefined"){
-    window.Cef = {
-        sendEvent:(n,d)=>console.log("CEF EVENT:",n,d)
+function spawn(num){
+    try{
+        Cef.sendEvent("spawn" + num, "{}");
+        console.log("Spawn enviado:", num);
+    }catch(e){
+        console.log("CEF não carregou ainda");
     }
 }
 
-// ENVIAR EVENTO IGUAL LOGIN
-function spawn(num){
-    Cef.sendEvent("spawn"+num, "");
-}
-
 function lastpos(){
-    Cef.sendEvent("lastpos", "");
+    try{
+        Cef.sendEvent("lastpos", "{}");
+        console.log("Última posição enviada");
+    }catch(e){
+        console.log("CEF não carregou ainda");
+    }
 }
-
-// garantir toque mobile
-document.addEventListener("touchstart", ()=>{}, true);
-
 </script>
 
 </head>
