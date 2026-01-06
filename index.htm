@@ -1,126 +1,109 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <title>Spawn</title>
 
 <style>
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial;
+    -webkit-tap-highlight-color: transparent; /* remove azul no clique mobile */
 }
 
 body{
     width:100vw;
     height:100vh;
-    background:url("assets/background.png");
-    background-size:cover;
-    background-position:center;
+    background:url("assets/background.png") no-repeat center/cover;
     display:flex;
     flex-direction:column;
+    align-items:center;
     justify-content:center;
-    align-items:center;
+    user-select:none;              /* não selecionar nada */
+    -webkit-user-select:none;
 }
 
-/* TÍTULO */
-.title{
-    color:rgba(255,255,255,0.7);
-    font-size:26px;
-    letter-spacing:1px;
-    margin-bottom:25px;
-    text-shadow:0 0 8px rgba(0,0,0,0.6);
-}
-
-/* CONTAINER */
-.container{
-    display:flex;
-    gap:30px;
-}
-
-/* BOXES */
-.card{
-    width:270px;
-    transition:.3s;
-    cursor:pointer;
-}
-
-.card img{
-    width:100%;
-}
-
-.card:hover{
-    transform:scale(1.1);
-}
-
-/* BOTÃO GLASS */
-.button-loc{
-    margin-top:35px;
-    padding:14px 40px;
-    border-radius:40px;
-    display:flex;
-    align-items:center;
-    gap:10px;
-    border:2px solid rgba(255,255,255,0.3);
-    background:rgba(123,44,255,0.25);
-    backdrop-filter:blur(6px);
-    color:white;
+h1{
+    color:#ffffffaa;
     font-size:18px;
+    letter-spacing:1px;
+    margin-bottom:15px;
+    text-align:center;
+}
+
+/* CONTAINER DAS IMAGENS */
+.box-area{
+    display:flex;
+    gap:12px;
+    transform:scale(0.75); /* -35% menor */
+}
+
+.box-area img{
+    width:95px;
+    height:auto;
+    border-radius:10px;
+    transition:0.2s;
+    pointer-events:auto;
+}
+
+/* efeito ampliar */
+.box-area img:hover,
+.box-area img:active{
+    transform:scale(1.15);
+}
+
+/* BOTÃO */
+button{
+    margin-top:10px;
+    display:flex;
+    align-items:center;
+    gap:4px;
+    padding:4px 10px;        /* bem menor */
+    border-radius:14px;      /* menor */
+    border:2px solid #ffffff30;
+    background:rgba(110,0,255,0.35);
+    color:white;
+    font-size:10px;          /* fonte menor */
     font-weight:bold;
     cursor:pointer;
-    transition:.3s;
+    outline:none;
 }
 
-.button-loc img{
-    width:22px;
+button img{
+    width:12px;              /* ícone menor */
 }
 
-.button-loc:hover{
-    transform:scale(1.05);
-    background:rgba(123,44,255,0.45);
+
+/* remove highlight azul android */
+button:focus{
+    outline:none;
 }
+
 </style>
 
 <script>
-function spawn(n){
-    CefEmitEvent("spawn"+n);
-}
-
-function lastPos(){
-    CefEmitEvent("lastpos");
+function spawn(type){
+    CefSendEvent(type,"");
 }
 </script>
 
 </head>
-
 <body>
 
-<h1 class="title">ESCOLHA ONDE COMEÇA SUA HISTÓRIA!</h1>
+<h1>ESCOLHA ONDE COMEÇA SUA HISTÓRIA!</h1>
 
-<div class="container">
-
-    <div class="card" onclick="spawn(1)">
-        <img src="assets/box1.png">
-    </div>
-
-    <div class="card" onclick="spawn(2)">
-        <img src="assets/box2.png">
-    </div>
-
-    <div class="card" onclick="spawn(3)">
-        <img src="assets/box3.png">
-    </div>
-
-    <div class="card" onclick="spawn(4)">
-        <img src="assets/box4.png">
-    </div>
-
+<div class="box-area">
+    <img src="assets/box1.png" onclick="spawn('spawn1')">
+    <img src="assets/box2.png" onclick="spawn('spawn2')">
+    <img src="assets/box3.png" onclick="spawn('spawn3')">
+    <img src="assets/box4.png" onclick="spawn('spawn4')">
 </div>
 
-<button class="button-loc" onclick="lastPos()">
+<button onclick="spawn('lastpos')">
     <img src="assets/localizacao.png">
-    ÚLTIMA LOCALIZAÇÃO
+    ULTIMA LOCALIZAÇÃO
 </button>
 
 </body>
